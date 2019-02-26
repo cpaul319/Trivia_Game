@@ -1,0 +1,129 @@
+/* 
+@font-face {
+    font-family: finalold;
+    src: url(FINALOLD.ttf);
+  } */
+html{
+
+    /* background-image: url("../images/startTrekBG.jpg"); */
+    font-family: 'Space Mono', monospace;
+    background-color: black;
+}
+
+body{
+    /* background-image: url("../images/startTrekBG.jpg"); */
+}
+  
+  /* div {
+    font-family: finalold;
+  } */
+
+header, h1{
+    height: 50px;
+     background-color: black; 
+    color: #ffffff;
+    text-align: center;
+    /* background-image: url("../images/startTrekBG.jpg"); */
+}
+.answerDisplay,#displayTotals, #timeDisplay,.displaypage{
+    height: 100px;
+    width: 75%;
+    border: 1px solid blue;
+    align-content: center;
+    margin: 8px 40px 8px 100px;
+    font-size: large;
+    color: #ffffff;
+}
+
+#displayTime{
+height: 100px;
+width: 75%;
+/* border: 1px solid rgb(229, 229, 238); */
+align-content: center;
+margin: 8px 40px 8px 100px;
+font-size: large;
+color: #ffffff;
+}
+.container-fluid{
+    background-color: #ffffff;
+}
+
+ 
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+     .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+     .container-fluid {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+      background-color: black;
+      
+    } 
+    
+    
+     
+  
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+    .questions{
+        height: 40px;
+        width: 75%;
+      
+     border: 1px solid black;
+    }
+    #startpage {
+        border: 1px solid green;
+        font-size: large;
+        align-content: center;
+        margin: 8px 20px 8px 100px;
+        height: 80px;
+        width: 75%;
+    }
+    .answer{
+        border: 1px solid red;
+        height: 300px;
+        width: 300px;;
+    }
+button{
+    border: 1px solid red;
+    height: 40px;
+    width: 100px;
+}
+.triviacontent{
+  
+    border: 1px solid red;
+    height: auto;
+    width: auto;
+    margin: 4px;
+  text-align: center;
+  line-height: 100px;
+  color: #ffffff;
+  font-size: large;
+}
+.display{
+    font-size: large;
+}
+#displayPicture{
+    border: 1px solid yellow;
+   
+    margin: 8px 20px 8px 100px;
+    height: 350px;
+    width: 75%;
+}
+
+#startpage:hover {
+  border:2px solid blue;
+  background: rgb(126, 98, 103);
+}
+.answerDisplay:hover {
+  border:2px solid blue;
+  background: rgb(126, 98, 103);
+}
