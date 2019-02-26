@@ -132,7 +132,7 @@ $(document).ready(function () {
             // console.log(questions[counter].Answers[i]);
         }
       
-        setTimeout(displayAnswer, 30000);
+         setTimeout(displayAnswer, 30000);
         
         $(".answerDisplay").click(
             function () {
