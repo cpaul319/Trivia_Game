@@ -44,9 +44,7 @@ margin: 8px 40px 8px 100px;
 font-size: large;
 color: #ffffff;
 }
-.container-fluid{
-    background-color: #ffffff;
-}
+ 
 
  
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -54,10 +52,14 @@ color: #ffffff;
     
     /* Set gray background color and 100% height */
      .container-fluid {
+      display: grid;
+      grid-template-columns: auto 900px auto;
+     
       padding-top: 20px;
       background-color: #f1f1f1;
       height: 100%;
       background-color: black;
+      margin: 0px, 50px, 0px, 50px;
       
     } 
     
@@ -80,10 +82,12 @@ color: #ffffff;
      border: 1px solid black;
     }
     #startpage {
+    
+      
         border: 1px solid green;
         font-size: large;
         align-content: center;
-        margin: 8px 20px 8px 100px;
+        margin: 8px 8px 100px 85px;
         height: 80px;
         width: 75%;
     }
@@ -98,15 +102,19 @@ button{
     width: 100px;
 }
 .triviacontent{
-  
+ 
     border: 1px solid red;
     height: auto;
-    width: auto;
+    width: 900px;
     margin: 4px;
   text-align: center;
   line-height: 100px;
   color: #ffffff;
   font-size: large;
+}
+
+.item8 {
+  grid-area: 1 / 2 / 5 / 6;
 }
 .display{
     font-size: large;
