@@ -80,7 +80,7 @@ $(document).ready(function () {
         function seconds() {
             if (timeLeft === 0) {
                 clearInterval(intervalId);
-                console.log("disPlaytimer " +timeLeft);
+                console.log("disPlaytimer " + timeLeft);
                 // displayAnswer();
             } else if (timeLeft > 0) {
                 timeLeft--;
@@ -103,17 +103,18 @@ $(document).ready(function () {
         $("#startpage").html("Start");
         $("#startpage").click(function () {
             // displayQuestion();
+            disPlayTimer();
             questionCounter();
-         
+
 
         });
     }
     startGame();
 
     function displayQuestion() {
-        
-        disPlayTimer();
-        console.log("disquestion " +timeLeft);
+        debugger
+
+        console.log("disquestion " + timeLeft);
         $(".display").html(questions[counter].question);
         console.log(questions[counter].question);
         console.log(counter);
@@ -131,41 +132,41 @@ $(document).ready(function () {
             $("#" + id).html(questions[counter].Answers[i]);
             // console.log(questions[counter].Answers[i]);
         }
-      
-         setTimeout(displayAnswer, 30000);
-        
+
+        setTimeout(displayAnswer, 30000);
+
         $(".answerDisplay").click(
             function () {
                 userAnswer = ($(this).attr('data-click'));
                 // console.log(userAnswer);
-                
-            displayAnswer();
+
+                displayAnswer();
             }
-           
+
         );
-       
+
     }
 
     function displayAnswer() {
-        console.log("disPlayanswer " +timeLeft);
+        debugger
         // $(".displayTime").empty();
 
         if (timeLeft > 0 && userAnswer !== questions[counter].correctAnswer) {
-            clearInterval(intervalId);
+            disPlayTimer();
             $(".display").html(questions[counter].incorrectAnswerMessage);
             incorrectAnswerCount++;
             setTimeout(questionCounter, 8000);
 
-        } else if(timeLeft > 0 && userAnswer === questions[counter].correctAnswer) {
-            clearInterval(intervalId);
+        } else if (timeLeft > 0 && userAnswer === questions[counter].correctAnswer) {
+            disPlayTimer();
             correctAnswerCount++;
             $(".display").html(questions[counter].correctAnswerMessage);
             setTimeout(questionCounter, 8000);
 
         } else {
-            clearInterval(intervalId);
+            disPlayTimer();
             $(".display").html(questions[counter].outOfTimeCorrectAnswerMessage);
-           
+
             unansweredCount++;
             setTimeout(questionCounter, 8000);
 
@@ -186,7 +187,7 @@ $(document).ready(function () {
     function endofGame() {
         clearInterval(intervalId);
         console.log("I am in the end game");
-        console.log("disendofgame " +timeLeft);
+        console.log("disendofgame " + timeLeft);
         // $(".display, .triviacontent, .displayTime").empty();
         $(".trviacontent").html("That's the end. Let's see how you scored.");
         for (var k = 0; k < 3; k++) {
@@ -210,31 +211,31 @@ $(document).ready(function () {
         $(".display").append(startpage);
         $("#startpage").html("Start Over?");
         $("#startpage").click(function () {
-            gameRunning =false;
+            gameRunning = false;
             setTimeout(resetGame, 8000);
             clearInterval(intervalId);
-           
+
         });
-      
-      
-        
+
+
+
     }
     function questionCounter() {
-      
-        if (counter < questions.length) {
+        debugger
+        if (counter <= questions.length) {
             // console.log(questions.length);
             // console.log(counter);
             counter++;
-            clearInterval(intervalId);
+            // disPlayTimer();
             timeLeft = 30;
-           
-            displayQuestion()
+
+            displayQuestion();
 
         } else {
-            timeLeft =0;
+            timeLeft = 0;
             clearInterval(intervalId);
             setTimeout(endofGame, 8000);
-             
+
         }
     }
 
