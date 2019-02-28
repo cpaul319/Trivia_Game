@@ -11,7 +11,7 @@ var userAnswer = "";
 var questionAnswered = false;
 
 var questionOne = {
-    "displayImg": "assets/images/tiberius.gif",
+    "displayImg": "assets/images/angryKirk.gif",
     "question": "What is Captain Kirk's middle name?",
     "Answers": ["Sam", "Timmothy", "Tiberius", "Solen"],
     "correctAnswer": "Tiberius",
