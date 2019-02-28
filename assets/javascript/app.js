@@ -2,7 +2,7 @@
 var correctAnswerCount = 0;
 var incorrectAnswerCount = 0;
 var unansweredCount = 0;
-var timeLeft = 10;
+var timeLeft = 20;
 var userClick = 0;
 var startClick = 0;
 var counter = 0;
@@ -92,13 +92,13 @@ $(document).ready(function () {
         correctAnswerCount = 0;
         incorrectAnswerCount = 0;
         unansweredCount = 0;
-        timeLeft = 10;
+        timeLeft = 20;
         displayQuestion();
     }
     function displayQuestion() {
       
         questionAnswered = false;
-        timeLeft = 10;
+        timeLeft = 20;
         intervalID = setInterval(displaySeconds, 1000);
         if (questionAnswered === false) {
             displaySeconds();
