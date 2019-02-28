@@ -2,13 +2,13 @@
 var correctAnswerCount = 0;
 var incorrectAnswerCount = 0;
 var unansweredCount = 0;
-var timeLeft = 30;
+var timeLeft = 10;
 var userClick = 0;
 var startClick = 0;
-var counter = -1;
+var counter = 0;
 var intervalId;
 var userAnswer = "";
-var gameRunning = true;
+var questionAnswered = false;
 
 var questionOne = {
     "displayImg": "assets/images/tiberius.gif",
@@ -35,7 +35,7 @@ var questionThree = {
     "question": "What class is the ship Enterprise",
     "Answers": ["Nimitz", "Constitution", "Nebula", "A-class"],
     "correctAnswer": "Constitution",
-    "outofTimeCorrectAnswerMessage": "I'm betting you aren't a Trekkie. You ran out of time. The correct answer was Constitution",
+    "outOfTimeCorrectAnswerMessage": "I'm betting you aren't a Trekkie. You ran out of time. The correct answer was Constitution",
     "correctAnswerMessage": "You know your ships! The correct answer was Constitution",
     "incorrectAnswerMessage": "Not a Trekkie huh!?. The answer is Constitution."
 
@@ -62,39 +62,9 @@ var questionFive = {
 };
 var questions = [questionOne, questionTwo, questionThree, questionFour, questionFive];
 $(document).ready(function () {
-
-    function resetGame() {
-        // setTimeout(function(){ $(".triviacontent").empty(); }, 8000);
-        counter = 0;
-        correctAnswerCount = 0;
-        incorrectAnswerCount = 0;
-        unansweredCount = 0;
-        timeLeft = 30;
-        startGame();
-
-    }
-
-    function disPlayTimer() {
-        clearInterval(intervalId);
-        intervalId = setInterval(seconds, 1000);
-        function seconds() {
-            if (timeLeft === 0) {
-                clearInterval(intervalId);
-                console.log("disPlaytimer " + timeLeft);
-                // displayAnswer();
-            } else if (timeLeft > 0) {
-                timeLeft--;
-            }
-            $("#displayTime").text("Time left: " + timeLeft + " seconds");
-        }
-
-
-        // return timeLeft;
-    }
     function startGame() {
         var startpage = $("<div>");
         startpage.attr({
-
             "data-click": startClick,
             "id": 'startpage'
         });
@@ -102,23 +72,38 @@ $(document).ready(function () {
         $(".display").append(startpage);
         $("#startpage").html("Start");
         $("#startpage").click(function () {
-            // displayQuestion();
-            disPlayTimer();
-            questionCounter();
-
-
+            displayQuestion();
         });
     }
     startGame();
-
+    function questionCounter() {
+        // one of the controls for the game
+        counter++;
+        if (counter < questions.length) {
+            displayQuestion();
+        } else {
+            clearInterval(intervalID);
+            setTimeout(endofGame, 8000);
+        }
+    }
+    function resetGame() {
+        // setTimeout(function(){ $(".triviacontent").empty(); }, 8000);
+        counter = 0;
+        correctAnswerCount = 0;
+        incorrectAnswerCount = 0;
+        unansweredCount = 0;
+        timeLeft = 10;
+        displayQuestion();
+    }
     function displayQuestion() {
-        debugger
-
-        console.log("disquestion " + timeLeft);
+      
+        questionAnswered = false;
+        timeLeft = 10;
+        intervalID = setInterval(displaySeconds, 1000);
+        if (questionAnswered === false) {
+            displaySeconds();
+        }
         $(".display").html(questions[counter].question);
-        console.log(questions[counter].question);
-        console.log(counter);
-        //think about to using id instead
         for (var i = 0; i < 4; i++) {
             var id = "answerDiv" + i;
             var answerDisplay = $("<div>");
@@ -128,49 +113,51 @@ $(document).ready(function () {
                 "id": id
             })
             $(".display").append(answerDisplay);
-            // $(".answerDisplay").html(questionOne.Answers[i]);
             $("#" + id).html(questions[counter].Answers[i]);
-            // console.log(questions[counter].Answers[i]);
         }
-
-        setTimeout(displayAnswer, 30000);
-
         $(".answerDisplay").click(
             function () {
+               
                 userAnswer = ($(this).attr('data-click'));
-                // console.log(userAnswer);
-
-                displayAnswer();
+                if (userAnswer !== questions[counter].correctAnswer) {
+                    questionAnswered = true;
+                    $(".display").html(questions[counter].incorrectAnswerMessage);
+                    incorrectAnswerCount++;
+                    displayImages();
+                    setTimeout(questionCounter, 8000);
+                    // questionCounter();
+                } else if (userAnswer === questions[counter].correctAnswer) {
+                    questionAnswered = true;
+                    correctAnswerCount++;
+                    $(".display").html(questions[counter].correctAnswerMessage);
+                    displayImages();
+                    setTimeout(questionCounter, 8000);
+                }
             }
-
         );
-
     }
-
-    function displayAnswer() {
-        debugger
-        // $(".displayTime").empty();
-
-        if (timeLeft > 0 && userAnswer !== questions[counter].correctAnswer) {
-            disPlayTimer();
-            $(".display").html(questions[counter].incorrectAnswerMessage);
-            incorrectAnswerCount++;
-            setTimeout(questionCounter, 8000);
-
-        } else if (timeLeft > 0 && userAnswer === questions[counter].correctAnswer) {
-            disPlayTimer();
-            correctAnswerCount++;
-            $(".display").html(questions[counter].correctAnswerMessage);
-            setTimeout(questionCounter, 8000);
-
-        } else {
-            disPlayTimer();
+    function displaySeconds() {
+        
+        if (timeLeft === 0) {
+            answered = true;
+            clearInterval(intervalID);
             $(".display").html(questions[counter].outOfTimeCorrectAnswerMessage);
-
+            console.log(counter);
             unansweredCount++;
+            displayImages();
             setTimeout(questionCounter, 8000);
+            // questionCounter();
+
+        } else if (questionAnswered === true) {
+            clearInterval(intervalID);
+        } else {
+            timeLeft--;
+            $("#displayTime").text("Time left: " + timeLeft + " seconds");
 
         }
+    }
+    function displayImages() {
+        
         var displayImage = $("<div>");
         displayImage.attr({
             "class": 'displayImage',
@@ -182,14 +169,13 @@ $(document).ready(function () {
             "background-size": "cover"
         });
         $(".display").append(displayImage);
-
     }
     function endofGame() {
+        debugger
         clearInterval(intervalId);
-        console.log("I am in the end game");
-        console.log("disendofgame " + timeLeft);
+        $("#displayTime").empty();
         // $(".display, .triviacontent, .displayTime").empty();
-        $(".trviacontent").html("That's the end. Let's see how you scored.");
+        $(".display").html("That's the end. Let's see how you scored.");
         for (var k = 0; k < 3; k++) {
             var id = "totalsDiv" + k;
             var displayTotals = $("<div>");
@@ -205,38 +191,14 @@ $(document).ready(function () {
             "id": 'startpage'
         });
         $(".display").append(displayTotals);
-        $("#totalsDiv0").html("Correct " + correctAnswerCount);
-        $("#totalsDiv1").html("Incorrecct " + incorrectAnswerCount);
-        $("#totalsDiv2").html("Unanswered " + unansweredCount);
+        $("#totalsDiv0").html("Correct = " + correctAnswerCount);
+        $("#totalsDiv1").html("Incorrect = " + incorrectAnswerCount);
+        $("#totalsDiv2").html("Unanswered = " + unansweredCount);
         $(".display").append(startpage);
         $("#startpage").html("Start Over?");
         $("#startpage").click(function () {
-            gameRunning = false;
-            setTimeout(resetGame, 8000);
+            resetGame();
             clearInterval(intervalId);
-
         });
-
-
-
     }
-    function questionCounter() {
-        debugger
-        if (counter <= questions.length) {
-            // console.log(questions.length);
-            // console.log(counter);
-            counter++;
-            // disPlayTimer();
-            timeLeft = 30;
-
-            displayQuestion();
-
-        } else {
-            timeLeft = 0;
-            clearInterval(intervalId);
-            setTimeout(endofGame, 8000);
-
-        }
-    }
-
 });
