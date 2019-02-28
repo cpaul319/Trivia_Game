@@ -2,7 +2,7 @@
 var correctAnswerCount = 0;
 var incorrectAnswerCount = 0;
 var unansweredCount = 0;
-var timeLeft = 20;
+var timeLeft = 10;
 var userClick = 0;
 var startClick = 0;
 var counter = 0;
@@ -72,10 +72,28 @@ $(document).ready(function () {
         $(".display").append(startpage);
         $("#startpage").html("Start");
         $("#startpage").click(function () {
-            displayQuestion();
+            displayIntro();
+            setTimeout(function(){ $(".display").empty(); }, 100);
+         setTimeout(displayQuestion, 5000);
+            // displayQuestion();
         });
     }
     startGame();
+    function displayIntro(){
+        var displayIntroImage = $("<div>");
+        displayIntroImage.attr({
+            "class": 'displayIntroImage',
+            "data-click": userClick,
+            "id": 'displayIntro'
+        })
+        displayIntroImage.css({
+            "background-image": ("url(assets/images/startGame.gif"),
+             
+            "background-size": "cover"
+        });
+        $(".triviacontent").append(displayIntroImage);
+        setTimeout(function(){ $(".displayIntroImage").remove(); }, 5000);
+    }
     function questionCounter() {
         // one of the controls for the game
         counter++;
@@ -92,13 +110,13 @@ $(document).ready(function () {
         correctAnswerCount = 0;
         incorrectAnswerCount = 0;
         unansweredCount = 0;
-        timeLeft = 20;
+        timeLeft = 10;
         displayQuestion();
     }
     function displayQuestion() {
       
         questionAnswered = false;
-        timeLeft = 20;
+        timeLeft = 10;
         intervalID = setInterval(displaySeconds, 1000);
         if (questionAnswered === false) {
             displaySeconds();
