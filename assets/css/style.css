@@ -26,9 +26,9 @@ body{
   background-size: auto; */
   font-size: 6vw;
    
-   
-    text-shadow: 2px 2px black;
    color: yellow;
+    text-shadow: 2px 2px black;
+    /* color: #ffffff; */
     text-align: center;
     /* background-image: url("../images/startTrekBG.jpg"); */
 }
@@ -127,12 +127,24 @@ button{
     font-size: large;
 }
 #displayPicture{
+ 
     border: 1px solid yellow;
-   opacity: 2.5;
+   opacity: 1;
     margin: 8px 20px 8px 100px;
     height: 350px;
     width: 75%;
+    z-index: 0;
 }
+.displayIntroImage{
+ 
+  border: 1px solid yellow;
+ opacity: 1;
+  margin: 8px 20px 8px 100px;
+  height: 500px;
+  width: 75%;
+  z-index: 0;
+}
+
 
 #startpage:hover {
   color: grey;
