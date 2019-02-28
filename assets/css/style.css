@@ -37,9 +37,10 @@ body{
     width: 75%;
     border: 1px solid blue;
     align-content: center;
-    margin: 8px 40px 8px 100px;
+    margin: 8px 85px 8px 85px;
     font-size: large;
     color: #ffffff;
+    /* margin: 8px 8px 100px 85px; */
 }
 
 #displayTime{
@@ -113,7 +114,7 @@ button{
   background-color: black;
     border: 1px solid black;
     height: auto;
-    width: 700px;
+    width: 800px;
     margin: 4px;
   text-align: center;
   line-height: 100px;
@@ -134,11 +135,11 @@ button{
 }
 
 #startpage:hover {
-  color: black;
-  opacity: 0.3;
-  background: rgb(126, 98, 103);
+  color: grey;
+   opacity: 0.3; 
+  
 }
 .answerDisplay:hover {
-  border:2px solid blue;
-  background: rgb(126, 98, 103);
+  color: grey;
+   opacity: 0.3; 
 }
