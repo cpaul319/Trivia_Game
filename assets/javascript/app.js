@@ -79,6 +79,7 @@ $(document).ready(function () {
         });
     }
     startGame();
+
     function displayIntro(){
         var displayIntroImage = $("<div>");
         displayIntroImage.attr({
@@ -92,7 +93,7 @@ $(document).ready(function () {
             "background-size": "cover"
         });
         $(".triviacontent").append(displayIntroImage);
-        setTimeout(function(){ $(".displayIntroImage").remove(); }, 5000);
+        setTimeout(function(){ $("#displayIntro").remove(); }, 5000);
     }
     function questionCounter() {
         // one of the controls for the game
@@ -175,21 +176,20 @@ $(document).ready(function () {
         }
     }
     function displayImages() {
-        
-        var displayImage = $("<div>");
+      
+        var displayImage = $('<img />');
         displayImage.attr({
+            'src':"" + questions[counter].displayImg + "",
             "class": 'displayImage',
             "data-click": userClick,
-            "id": 'displayPicture'
+            "id": 'displayPicture',
+            'title': 'Answer Image',
+            'alt': "Star Trek Image"
         })
-        displayImage.css({
-            "background-image": "url('" + questions[counter].displayImg + "')",
-            "background-size": "cover"
-        });
         $(".display").append(displayImage);
     }
     function endofGame() {
-        debugger
+         
         clearInterval(intervalId);
         $("#displayTime").empty();
         // $(".display, .triviacontent, .displayTime").empty();
