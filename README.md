@@ -21,7 +21,7 @@ and an option to restart the game (without reloading the page).
 * The game ends when the time runs out. The page will reveal the number of questions 
 that players answer correctly and incorrectly.
 
- ![concert data with input](public/assets/images/starTrekTrivia.png)
+ ![concert data with input](starTrekTrivia.png)
 
  [Link to application](https://cpaul319.github.io/Trivia_Game/)
 
